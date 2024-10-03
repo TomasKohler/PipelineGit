@@ -24,7 +24,7 @@ jobs:
       
       - name: Deploy to S3
         run: |
-          aws s3 sync . s3:tk-static-s3 --delete
+          aws s3 sync . s3://tk-static-s3 --delete
       - name:  Create CloudFront Invalidation
         run: |
           aws cloudfront create-invalidation --distribution-id E251JGLY7U58OC  --paths "/*"  
