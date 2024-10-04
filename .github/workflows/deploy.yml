@@ -24,7 +24,7 @@ jobs:
       
       - name: Deploy to S3
         run: |
-          aws s3 sync . s3://${{ secrets.AWS_BUCKET }} --delete
+          aws s3 sync . s3://${{ vars.AWS_BUCKET }} --delete
       - name:  Create CloudFront Invalidation
         run: |
-          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT }}  --paths "/*"  
+          aws cloudfront create-invalidation --distribution-id ${{ vars.AWS_CLOUDFRONT }}  --paths "/*"  
