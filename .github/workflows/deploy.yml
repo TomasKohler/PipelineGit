@@ -19,12 +19,12 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::253490770873:role/tk-GitAction
+          role-to-assume: ${{ secrets.AWS_ROLE}}
           aws-region: us-east-2
       
       - name: Deploy to S3
         run: |
-          aws s3 sync . s3://tk-static-s3 --delete
+          aws s3 sync . s3://${{ secrets.AWS_BUCKET }} --delete
       - name:  Create CloudFront Invalidation
         run: |
-          aws cloudfront create-invalidation --distribution-id E251JGLY7U58OC  --paths "/*"  
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT }}  --paths "/*"  
